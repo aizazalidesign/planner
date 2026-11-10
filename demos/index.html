@@ -1,8 +1,46 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Planner Preview Gallery</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f4ef;color:#283c35;font:16px/1.5 system-ui,sans-serif}.wrap{max-width:900px;margin:50px auto;padding:24px}.hero{padding:34px;background:#e5eee7;border-radius:22px;margin-bottom:24px}h1{font:38px Georgia;margin:0 0 10px}.hero p{color:#5c6d64}.item{display:flex;align-items:center;gap:16px;padding:18px 20px;margin:10px 0;background:#fff;border:1px solid #e2e6df;border-radius:14px;color:inherit;text-decoration:none}.item span{color:#668476;font-size:12px}.item strong{flex:1}.item b{font-size:13px;color:#47745e}.note{font-size:13px;color:#68766f;margin-top:24px}</style></head><body><div class="wrap"><section class="hero"><h1>Planner Preview Gallery</h1><p>Explore the planners below. These are read-only previews: editing, saving, and exporting are disabled. The purchased full versions are separate editable files.</p></section><a class="item" href="./mintnest/"><span>01</span><strong>MintNest Family Planner</strong><b>Open demo ↗</b></a>
-<a class="item" href="./bloomstead-family/"><span>02</span><strong>Bloomstead Family Planner</strong><b>Open demo ↗</b></a>
-<a class="item" href="./evergift-noel/"><span>03</span><strong>Evergift Noel Christmas Planner</strong><b>Open demo ↗</b></a>
-<a class="item" href="./lumalife/"><span>04</span><strong>LumaLife All-in-One Planner</strong><b>Open demo ↗</b></a>
-<a class="item" href="./merrynest/"><span>05</span><strong>MerryNest Gift Planner</strong><b>Open demo ↗</b></a>
-<a class="item" href="./rosenest/"><span>06</span><strong>RoseNest Family Organizer</strong><b>Open demo ↗</b></a>
-<a class="item" href="./softly-life/"><span>07</span><strong>Softly Life Planner</strong><b>Open demo ↗</b></a>
-<a class="item" href="./threadhaven/"><span>08</span><strong>Threadhaven Crochet Studio</strong><b>Open demo ↗</b></a><p class="note">Demo previews are provided for evaluation only.</p></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Planner Studio • Live Preview Gallery</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f6fb;color:#211d2b;font:14px/1.5 Inter,system-ui,sans-serif}
+.notice{background:linear-gradient(90deg,#34206f,#7651e5);color:#fff;text-align:center;padding:10px 16px;font-size:12px}
+aside{position:fixed;inset:0 auto 0 0;width:220px;background:#fff;border-right:1px solid #e9e5f0;padding:24px 16px;display:flex;flex-direction:column}
+.brand{font-size:23px;font-weight:800;letter-spacing:-1px}.brand span{color:#7654df}.sub{font-size:9px;letter-spacing:2px;color:#81798d;margin:4px 0 28px}
+nav a{display:block;padding:10px 12px;margin:4px 0;border-radius:9px;color:#625d6d;text-decoration:none}nav a.active{background:#f0ebff;color:#6545c9;font-weight:700}
+.foot{margin-top:auto;border-top:1px solid #eeeaf4;padding-top:15px;color:#716a7c;font-size:12px}
+main{margin-left:220px;padding:24px 32px 50px;max-width:1600px}
+header{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #ebe7f1;border-radius:13px;padding:14px 18px;margin-bottom:22px}
+.eyebrow{text-transform:uppercase;letter-spacing:1.6px;font-size:10px;color:#716a7c}
+h1{font-size:31px;letter-spacing:-1px;margin:7px 0}h2{font-size:20px;margin:0 0 8px}
+.hero{background:linear-gradient(115deg,#f0ebff,#fff 70%);border:1px solid #e6defb;border-radius:17px;padding:30px;margin-bottom:22px}
+.hero p{max-width:650px;color:#625d6d;margin:8px 0 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}.stat,.tile{background:#fff;border:1px solid #ebe7f1;border-radius:14px;box-shadow:0 4px 16px #33205b08}
+.stat{padding:16px}.stat strong{display:block;font:28px Georgia;margin:6px 0;color:#49317f}.stat small{color:#716a7c}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tile{padding:18px;display:flex;flex-direction:column;min-height:190px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#f0ebff;color:#6948d0;font-size:20px}
+.tag{font-size:10px;background:#f5f1ff;color:#6745ce;padding:5px 9px;border-radius:20px}
+.tile p{color:#716a7c;margin:7px 0 18px;flex:1;font-size:13px}
+a.open{display:inline-flex;align-items:center;justify-content:center;background:#6d4bd5;color:#fff;text-decoration:none;padding:10px 14px;border-radius:9px;font-weight:650;font-size:12px}
+a.open:hover{background:#5535b7}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){aside{position:static;width:auto;padding:16px}.sub{margin-bottom:12px}nav{display:flex;gap:6px;overflow:auto}nav a{white-space:nowrap;margin:0}main{margin:0;padding:14px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}header{padding:12px}h1{font-size:25px}.hero{padding:21px}}
+</style></head>
+<body><div class="notice">NOVA PLANS · INTERACTIVE PRODUCT PREVIEWS · Explore each planner before choosing</div>
+<aside><div class="brand"><span>✦</span> Planner Studio</div><div class="sub">YOUR DIGITAL ORGANIZING SPACE</div><nav><a class="active" href="./">⌂ &nbsp; Preview Gallery</a><a href="./mintnest/">▦ &nbsp; Family Planner</a><a href="./threadhaven/">✿ &nbsp; Crochet Studio</a></nav><div class="foot">Eight carefully designed planner previews.<br>Purchased full versions remain separate.</div></aside>
+<main><header><div><div class="eyebrow">YOUR PRODUCT SHOWCASE</div><strong>Planner Preview Gallery</strong></div><div class="tag">8 DEMOS AVAILABLE</div></header>
+<section class="hero"><div class="eyebrow">WELCOME TO YOUR PLANNER STUDIO</div><h1>Find your space. Plan your way.</h1><p>Explore the live previews below. Open a planner, move through its sections and view its tools. Demo mode keeps typing and saving disabled; the purchased HTML planner is the complete editable version.</p></section>
+<section class="stats"><div class="stat"><small>Available previews</small><strong>08</strong><small>Explore all planners</small></div><div class="stat"><small>Preview mode</small><strong>Live</strong><small>Browse sections and tabs</small></div><div class="stat"><small>Data entry</small><strong>Off</strong><small>Read-only demonstration</small></div><div class="stat"><small>Full version</small><strong>Editable</strong><small>Separate customer file</small></div></section>
+<div class="grid">
+<article class="tile"><div class="top"><div class="icon">⌂</div><span class="tag">FAMILY</span></div><h2>MintNest Family Planner</h2><p>A calm family command center for schedules, routines, tasks, meals and home organization.</p><a class="open" href="./mintnest/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">✿</div><span class="tag">FAMILY</span></div><h2>Bloomstead Family Planner</h2><p>Organize family life, household routines, planning lists and everyday responsibilities.</p><a class="open" href="./bloomstead-family/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">🎄</div><span class="tag">SEASONAL</span></div><h2>Evergift Noel</h2><p>A festive holiday organizer for gift lists, seasonal tasks, events and celebrations.</p><a class="open" href="./evergift-noel/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">✦</div><span class="tag">ALL-IN-ONE</span></div><h2>LumaLife Planner</h2><p>A flexible personal organizer for goals, routines, notes, plans and everyday life.</p><a class="open" href="./lumalife/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">🎁</div><span class="tag">GIFT PLANNING</span></div><h2>MerryNest Gift Planner</h2><p>Keep gift ideas, occasions, budgets and celebration details together in one place.</p><a class="open" href="./merrynest/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">♡</div><span class="tag">HOME</span></div><h2>RoseNest Family Organizer</h2><p>A soft, practical space for family schedules, household tasks and home routines.</p><a class="open" href="./rosenest/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">☼</div><span class="tag">LIFESTYLE</span></div><h2>Softly Life Planner</h2><p>Plan personal priorities, self-care, habits, goals and a more balanced weekly rhythm.</p><a class="open" href="./softly-life/">Explore planner ↗</a></article>
+<article class="tile"><div class="top"><div class="icon">🧶</div><span class="tag">CROCHET</span></div><h2>ThreadHaven Crochet Studio</h2><p>Explore a dedicated craft workspace for crochet projects, yarn and creative planning.</p><a class="open" href="./threadhaven/">Explore planner ↗</a></article>
+</div></main></body></html>
