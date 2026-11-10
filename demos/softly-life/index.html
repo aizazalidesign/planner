@@ -97,22 +97,17 @@ input[readonly],textarea[readonly],select:disabled{opacity:.72!important;cursor:
 </style>
 <script id="demo-readonly-guard">
 (()=> {
- const blocked=/(^|\\b)(save|delete|remove|clear all|reset|restore|import|export|download|upload|submit|confirm|add|create|duplicate|backup|back up|mark done|mark complete|complete task|finish task|edit|update)(\\b|$)/i;
  const lock=()=>{
   document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),textarea').forEach(el=>{el.readOnly=true;el.setAttribute('aria-readonly','true')});
   document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(el=>{el.disabled=true;el.setAttribute('aria-disabled','true')});
   document.querySelectorAll('[contenteditable="true"],[contenteditable=""]').forEach(el=>{el.contentEditable='false'});
-  document.querySelectorAll('button').forEach(el=>{
-   const label=(el.innerText||el.getAttribute('aria-label')||el.title||'').trim().replace(/\s+/g,' ');
-   if(blocked.test(label)){el.classList.add('demo-action-blocked');el.setAttribute('aria-disabled','true');}
-   else {el.disabled=false;el.removeAttribute('aria-disabled');}
-  });
+  document.querySelectorAll('button').forEach(el=>{el.disabled=false;el.classList.remove('demo-action-blocked');el.removeAttribute('aria-disabled')});
   document.querySelectorAll('a[download]').forEach(el=>{el.removeAttribute('download');el.setAttribute('aria-disabled','true')});
  };
  const addNotice=()=>{
   if(document.getElementById('demoReadOnlyNotice'))return;
   const n=document.createElement('div');n.id='demoReadOnlyNotice';
-  n.innerHTML='INTERACTIVE PREVIEW <span>— explore tabs, menus and sections; data entry and saving are disabled</span>';
+  n.innerHTML='INTERACTIVE PREVIEW <span>— click through every section, tab and viewing control; typing and saving are disabled</span>';
   document.body.insertBefore(n,document.body.firstChild);
  };
  const start=()=>{
@@ -120,12 +115,6 @@ input[readonly],textarea[readonly],select:disabled{opacity:.72!important;cursor:
   new MutationObserver(()=>lock()).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled','contenteditable','readonly']});
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
- document.addEventListener('click',e=>{
-  const b=e.target.closest('button');
-  if(!b)return;
-  const label=(b.innerText||b.getAttribute('aria-label')||b.title||'').trim().replace(/\s+/g,' ');
-  if(blocked.test(label)){e.preventDefault();e.stopImmediatePropagation();}
- },true);
  document.addEventListener('submit',e=>{e.preventDefault();e.stopImmediatePropagation()},true);
  document.addEventListener('beforeinput',e=>{
   if(e.target.matches('input:not([type="button"]):not([type="submit"]),textarea,[contenteditable="true"]')){e.preventDefault();e.stopImmediatePropagation()}
