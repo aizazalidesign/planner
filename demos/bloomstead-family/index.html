@@ -254,28 +254,43 @@ render();if(!recovery)persist();setInterval(clock,30000);setInterval(timerTick,1
 </script><style id="demo-readonly-style">
 #demoReadOnlyNotice{position:sticky;top:0;z-index:999999;background:#203f35;color:#fff;text-align:center;padding:10px 14px;font:600 13px/1.4 system-ui,sans-serif;letter-spacing:.2px;box-shadow:0 2px 10px #0002}
 #demoReadOnlyNotice span{opacity:.85;font-weight:400}
-button:disabled,input:disabled,select:disabled,textarea:disabled{opacity:.58!important;cursor:not-allowed!important;filter:saturate(.65)}
+input[readonly],textarea[readonly],select:disabled{opacity:.72!important;cursor:not-allowed!important}
+.demo-action-blocked{opacity:.55!important;cursor:not-allowed!important}
 </style>
 <script id="demo-readonly-guard">
 (()=> {
+ const blocked=/^(save|save changes|delete|remove|clear all|reset|restore|import|export|download|upload|submit|confirm|add new|create new|duplicate|back up|backup)$/i;
  const lock=()=>{
-  document.querySelectorAll('input,select,textarea').forEach(el=>{el.disabled=true;el.setAttribute('aria-disabled','true')});
-  document.querySelectorAll('[contenteditable="true"],[contenteditable=""],[designMode="on"]').forEach(el=>{el.contentEditable='false'});
+  document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),textarea').forEach(el=>{el.readOnly=true;el.setAttribute('aria-readonly','true')});
+  document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(el=>{el.disabled=true;el.setAttribute('aria-disabled','true')});
+  document.querySelectorAll('[contenteditable="true"],[contenteditable=""]').forEach(el=>{el.contentEditable='false'});
   document.querySelectorAll('button').forEach(el=>{
-   if(el.closest('nav')) return;
-   el.disabled=true;el.setAttribute('aria-disabled','true');el.title='Available in the full editable version';
+   const label=(el.innerText||el.getAttribute('aria-label')||el.title||'').trim().replace(/\s+/g,' ');
+   if(blocked.test(label)){el.classList.add('demo-action-blocked');el.setAttribute('aria-disabled','true');}
+   else {el.disabled=false;el.removeAttribute('aria-disabled');}
   });
-  document.querySelectorAll('a[download]').forEach(el=>{el.removeAttribute('download');el.setAttribute('aria-disabled','true');el.addEventListener('click',e=>e.preventDefault())});
+  document.querySelectorAll('a[download]').forEach(el=>{el.removeAttribute('download');el.setAttribute('aria-disabled','true')});
  };
  const addNotice=()=>{
   if(document.getElementById('demoReadOnlyNotice'))return;
   const n=document.createElement('div');n.id='demoReadOnlyNotice';
-  n.innerHTML='PREVIEW DEMO · READ ONLY <span>— navigation is available; editing, saving and exporting are disabled</span>';
+  n.innerHTML='INTERACTIVE PREVIEW <span>— explore tabs, menus and sections; data entry and saving are disabled</span>';
   document.body.insertBefore(n,document.body.firstChild);
  };
- const start=()=>{addNotice();lock();new MutationObserver(()=>lock()).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled','contenteditable']})};
+ const start=()=>{
+  addNotice();lock();
+  new MutationObserver(()=>lock()).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['disabled','contenteditable','readonly']});
+ };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+ document.addEventListener('click',e=>{
+  const b=e.target.closest('button');
+  if(!b)return;
+  const label=(b.innerText||b.getAttribute('aria-label')||b.title||'').trim().replace(/\s+/g,' ');
+  if(blocked.test(label)){e.preventDefault();e.stopImmediatePropagation();}
+ },true);
  document.addEventListener('submit',e=>{e.preventDefault();e.stopImmediatePropagation()},true);
- document.addEventListener('beforeinput',e=>{e.preventDefault();e.stopImmediatePropagation()},true);
+ document.addEventListener('beforeinput',e=>{
+  if(e.target.matches('input:not([type="button"]):not([type="submit"]),textarea,[contenteditable="true"]')){e.preventDefault();e.stopImmediatePropagation()}
+ },true);
 })();
 </script></body></html>
