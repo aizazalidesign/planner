@@ -112,7 +112,7 @@ input[readonly],textarea[readonly],select:disabled{opacity:.72!important;cursor:
 </style>
 <script id="demo-readonly-guard">
 (()=> {
- const blocked=/^(save|save changes|delete|remove|clear all|reset|restore|import|export|download|upload|submit|confirm|add new|create new|duplicate|back up|backup)$/i;
+ const blocked=/(^|\\b)(save|delete|remove|clear all|reset|restore|import|export|download|upload|submit|confirm|add|create|duplicate|backup|back up|mark done|mark complete|complete task|finish task|edit|update)(\\b|$)/i;
  const lock=()=>{
   document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),textarea').forEach(el=>{el.readOnly=true;el.setAttribute('aria-readonly','true')});
   document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(el=>{el.disabled=true;el.setAttribute('aria-disabled','true')});
